@@ -29,8 +29,12 @@ const Card = ({ taskObj, index, deleteTask, updateListArray }) => {
     }
 
     const handleCheckboxChange = (event) => {
+        if(event.target.checked){
+            deleteTask(index);
+        }else{
         taskObj.completed = event.target.checked;
         updateTask(taskObj);
+    }
     }
 
     const categoryIndex = taskObj.category !== undefined ? taskObj.category % colors.length : 0;
@@ -38,9 +42,9 @@ const Card = ({ taskObj, index, deleteTask, updateListArray }) => {
     const secondaryColor = colors[categoryIndex]?.secondaryColor || theme.palette.grey[200];
 
     return (
-        <MuiCard style={{ marginBottom: 20, position: 'relative' }}>
+        <MuiCard style={{ marginBottom: 20, position: 'relative', margin: 10 }}>
             <div style={{ backgroundColor: primaryColor, height: 5 }}></div>
-            <CardContent style={{ backgroundColor: secondaryColor }}>
+            <CardContent style={{ backgroundColor: secondaryColor, height:13 }}>
                 <Typography variant="h5" component="div">
                     <Checkbox checked={taskObj.completed} onChange={handleCheckboxChange} />
                     {taskObj.Name}
